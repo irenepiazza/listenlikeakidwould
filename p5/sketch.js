@@ -145,7 +145,7 @@ function preload () {
   cont.push({
     dato_numero: "2050",
     dato_info: "New research predicts a doubling of surface melting",
-    song: loadSound('Sounds/Sound9.wav'),
+    song: loadSound('Sounds/Sound9.ogg'),
     bg0: loadImage('Images/img1.jpg'),
     bg1: loadImage('Images/img2.jpg'),
     tint1:color(58, 114, 255, 100),
@@ -161,7 +161,7 @@ function preload () {
   cont.push({
     dato_numero: "286;0 decreasing rate of change",
     dato_info: "Greenland mass variation since 2002",
-    song: loadSound('Sounds/Sound10.wav'),
+    song: loadSound('Sounds/Sound10.ogg'),
     bg0: loadImage('Images/img1.jpg'),
     bg1: loadImage('Images/img2.jpg'),
     tint1: color(58, 114, 255, 100),

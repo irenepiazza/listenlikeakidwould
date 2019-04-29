@@ -12,7 +12,7 @@ function preload () {
   cont.push({
     dato_numero: "13;2% decrease per decade",
     dato_info: "rate of Change of the arCtic sea iCe",
-    song: loadSound('Sounds/Sound1.wav'),
+    song: loadSound('Sounds/Sound1.ogg'),
     bg0: loadImage('Images/img1.jpg'),
     bg1: loadImage('Images/img2.jpg'),
     tint1: color(58, 114, 255, 100),
@@ -28,7 +28,7 @@ function preload () {
   cont.push({
     dato_numero: "3;2 millimeters per year",
     dato_info: "rate of sea level rise",
-    song: loadSound('Sounds/Sound2.wav'),
+    song: loadSound('Sounds/Sound2.ogg'),
     bg0: loadImage('Images/img1.jpg'),
     bg1: loadImage('Images/img2.jpg'),
     tint1: color(58, 114, 255, 100),
@@ -44,7 +44,7 @@ function preload () {
   cont.push({
     dato_numero: "2016",
     dato_info: "warmest year on reCord",
-    song: loadSound('Sounds/Sound3.wav'),
+    song: loadSound('Sounds/Sound3.ogg'),
     bg0: loadImage('Images/img1.jpg'),
     bg1: loadImage('Images/img2.jpg'),
     tint1: color(58, 114, 255, 100),
@@ -61,7 +61,7 @@ function preload () {
   cont.push({
     dato_numero: "407;61 parts per million",
     dato_info: "Carbon dioxide level",
-    song: loadSound('Sounds/Sound4.wav'),
+    song: loadSound('Sounds/Sound4.ogg'),
     bg0: loadImage('Images/img1.jpg'),
     bg1: loadImage('Images/img2.jpg'),
     tint1: color(58, 114, 255, 100),
@@ -78,7 +78,7 @@ function preload () {
   cont.push({
     dato_numero: "22:000/31:000",
     dato_info: "polar bears worldwide",
-    song: loadSound('Sounds/Sound5.wav'),
+    song: loadSound('Sounds/Sound5.ogg'),
     bg0: loadImage('Images/img1.jpg'),
     bg1: loadImage('Images/img2.jpg'),
     tint1: color(58, 114, 255, 100),
@@ -95,7 +95,7 @@ function preload () {
   cont.push({
     dato_numero: "30%",
     dato_info: "deCrease of global polar bear number by 2050",
-    song: loadSound('Sounds/Sound6.wav'),
+    song: loadSound('Sounds/Sound6.ogg'),
     bg0: loadImage('Images/img1.jpg'),
     bg1: loadImage('Images/img2.jpg'),
     tint1:color(58, 114, 255, 100),
@@ -112,7 +112,7 @@ function preload () {
   cont.push({
     dato_numero: "0;302=F",
     dato_info: "warming of top 700 meters of oCean since 1969",
-    song: loadSound('Sounds/Sound7.wav'),
+    song: loadSound('Sounds/Sound7.ogg'),
     bg0: loadImage('Images/img1.jpg'),
     bg1: loadImage('Images/img2.jpg'),
     tint1:color(58, 114, 255, 100),
@@ -129,7 +129,7 @@ function preload () {
   cont.push({
     dato_numero: "127;0 decreasing rate of change",
     dato_info: "Antartica mass variation since 2002",
-    song: loadSound('Sounds/Sound8.wav'),
+    song: loadSound('Sounds/Sound8.ogg'),
     bg0: loadImage('Images/img1.jpg'),
     bg1: loadImage('Images/img2.jpg'),
     tint1:color(58, 114, 255, 100),

@@ -61,7 +61,7 @@ function preload () {
   cont.push({
     dato_numero: "407;61 parts per million",
     dato_info: "Carbon dioxide level",
-    song: loadSound('Sounds/Sound4.mp3'),
+    song: loadSound('sounds/Sound4.mp3'),
     bg0: loadImage('Images/img1.jpg'),
     bg1: loadImage('Images/img5.jpg'),
     tint1: null,
@@ -112,7 +112,7 @@ function preload () {
   cont.push({
     dato_numero: "0;302=F",
     dato_info: "warming of top 700 meters of oCean since 1969",
-    song: loadSound('Sounds/Sound7.mp3'),
+    song: loadSound('Sounds/sound7.mp3'),
     bg0: loadImage('Images/img1.jpg'),
     bg1: loadImage('Images/img8.jpg'),
     tint1:null,
@@ -129,7 +129,7 @@ function preload () {
   cont.push({
     dato_numero: "127;0 decreasing rate of change",
     dato_info: "Antartica mass variation since 2002",
-    song: loadSound('Sounds/Sound8.mp3'),
+    song: loadSound('Sounds/sound8.mp3'),
     bg0: loadImage('Images/img1.jpg'),
     bg1: loadImage('Images/img9.jpg'),
     tint1:null,

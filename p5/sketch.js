@@ -261,22 +261,11 @@ function mousePressed() {
     //fullscreen(true);
   //}
 
-  if (selected.video != null) {
-      selected.video.loop();
-      selected.video.hide();
-  }
-
-
-
   if (slide == 2) {
-    slide++;
+    slide=1;
     song.setVolume(0.2);
   }
-  
-  if (slide >2 ) {
-    slide = 1;
-  }
-  
+    
   if (slide == 1) {
     if (! song.isPlaying() ) {
       song.play();
@@ -288,6 +277,10 @@ function mousePressed() {
   
 
   if (slide == 0 ) {
+    if (selected.video != null) {
+      selected.video.loop();
+      selected.video.hide();
+  }
     slide++;
   }
 }

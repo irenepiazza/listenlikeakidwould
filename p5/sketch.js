@@ -263,6 +263,7 @@ function mousePressed() {
 
   if (selected.video != null) {
       selected.video.loop();
+      selected.video.hide();
   }
 
 
@@ -271,7 +272,11 @@ function mousePressed() {
     slide++;
     song.setVolume(0.2);
   }
-
+  
+  if (slide >2 ) {
+    slide = 1;
+  }
+  
   if (slide == 1) {
     if (! song.isPlaying() ) {
       song.play();
@@ -280,9 +285,7 @@ function mousePressed() {
     slide++;
   }
 
-  if (slide >2 ) {
-    slide = 1;
-  }
+  
 
   if (slide == 0 ) {
     slide++;

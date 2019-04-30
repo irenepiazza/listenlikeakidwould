@@ -61,7 +61,7 @@ function preload () {
   cont.push({
     dato_numero: "407;61 parts per million",
     dato_info: "Carbon dioxide level",
-    song: loadSound('sounds/sound4.mp3'),
+    song: loadSound('Sounds/sound4.mp3'),
     bg0: loadImage('Images/img1.jpg'),
     bg1: loadImage('Images/img5.jpg'),
     tint1: null,

@@ -170,7 +170,7 @@ function preload () {
     videoP: 'assets/Greenland mass variation.mp4',
     video: null,
     bg2: null,
-    ct1: color(0,0,0),
+    ct1: color(255,255,255),
     ct2: color(0,0,0)
   });
 

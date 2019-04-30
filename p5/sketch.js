@@ -186,6 +186,9 @@ function preload () {
 
 function setup() {
   //var i = floor(random(0,cont.length));
+  
+  var el = document.getElementsByTagName("canvas")[0];
+  el.addEventListener("touchstart", mousePressed, false);
 
 
   selected = cont[sn];

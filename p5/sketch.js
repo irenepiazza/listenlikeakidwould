@@ -188,7 +188,7 @@ function setup() {
   //var i = floor(random(0,cont.length));
   
   var el = document.getElementsByTagName("canvas")[0];
-  el.addEventListener("touchstart", mousePressed, false);
+  el.addEventListener("touchstart", touchApple, false);
 
 
   selected = cont[sn];
@@ -260,16 +260,43 @@ function draw() {
 
 function mousePressed() {
 
-  let fs = fullscreen();
-  if(!fs) {
-    fullscreen(true);
-  }
+  //let fs = fullscreen();
+  //if(!fs) {
+    //fullscreen(true);
+  //}
 
   if (selected.video != null) {
       selected.video.loop();
   }
 
 
+
+  if (slide == 2) {
+    slide++;
+    song.setVolume(0.2);
+  }
+
+  if (slide == 1) {
+    if (! song.isPlaying() ) {
+      song.play();
+    }
+    song.setVolume(1);
+    slide++;
+  }
+
+  if (slide >2 ) {
+    slide = 1;
+  }
+
+  if (slide == 0 ) {
+    slide++;
+  }
+}
+
+function touchApple() {
+  if (selected.video != null) {
+      selected.video.loop();
+  }
 
   if (slide == 2) {
     slide++;

@@ -7,7 +7,7 @@ let sn;
 
 function preload () {
 
-  myFont = loadFont('fonts/Newfont-Regular.ttf');
+  myFont = loadFont('/fonts/Newfont-Regular.ttf');
 
   cont.push({
     dato_numero: "13;2% decrease per decade",
@@ -61,7 +61,7 @@ function preload () {
   cont.push({
     dato_numero: "407;61 parts per million",
     dato_info: "Carbon dioxide level",
-    song: loadSound('Sounds/sound4.mp3'),
+    song: loadSound('Sounds/Sound4.mp3'),
     bg0: loadImage('Images/img1.jpg'),
     bg1: loadImage('Images/img5.jpg'),
     tint1: null,
@@ -112,7 +112,7 @@ function preload () {
   cont.push({
     dato_numero: "0;302=F",
     dato_info: "warming of top 700 meters of oCean since 1969",
-    song: loadSound('Sounds/sound7.mp3'),
+    song: loadSound('Sounds/Sound7.mp3'),
     bg0: loadImage('Images/img1.jpg'),
     bg1: loadImage('Images/img8.jpg'),
     tint1:null,
@@ -129,7 +129,7 @@ function preload () {
   cont.push({
     dato_numero: "127;0 decreasing rate of change",
     dato_info: "Antartica mass variation since 2002",
-    song: loadSound('Sounds/sound8.mp3'),
+    song: loadSound('Sounds/Sound8.mp3'),
     bg0: loadImage('Images/img1.jpg'),
     bg1: loadImage('Images/img9.jpg'),
     tint1:null,
@@ -170,7 +170,7 @@ function preload () {
     videoP: 'assets/Greenland mass variation.mp4',
     video: null,
     bg2: null,
-    ct1: color(255,255,255),
+    ct1: color(0,0,0),
     ct2: color(0,0,0)
   });
 
@@ -186,6 +186,7 @@ function preload () {
 
 function setup() {
   //var i = floor(random(0,cont.length));
+
 
   selected = cont[sn];
   song = selected.song;
@@ -256,16 +257,22 @@ function draw() {
 
 function mousePressed() {
 
-  //let fs = fullscreen();
-  //if(!fs) {
-    //fullscreen(true);
-  //}
+  let fs = fullscreen();
+  if(!fs) {
+    fullscreen(true);
+  }
+
+  if (selected.video != null) {
+      selected.video.loop();
+  }
+
+
 
   if (slide == 2) {
-    slide=1;
+    slide++;
     song.setVolume(0.2);
   }
-    
+
   if (slide == 1) {
     if (! song.isPlaying() ) {
       song.play();
@@ -274,13 +281,11 @@ function mousePressed() {
     slide++;
   }
 
-  
+  if (slide >2 ) {
+    slide = 1;
+  }
 
   if (slide == 0 ) {
-    if (selected.video != null) {
-      selected.video.loop();
-      selected.video.hide();
-  }
     slide++;
   }
 }

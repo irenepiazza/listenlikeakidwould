@@ -7,7 +7,7 @@ let sn;
 
 function preload () {
 
-  myFont = loadFont('/fonts/Newfont-Regular.ttf');
+  myFont = loadFont('fonts/Newfont-Regular.ttf');
 
   cont.push({
     dato_numero: "13;2% decrease per decade",

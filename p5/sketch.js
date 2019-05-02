@@ -4,17 +4,65 @@ let song;
 let selected;
 let slide;
 let sn;
+var myAudioContext;
+var mySource;
+let target;
+var userAgent;
+var source;
+var iphone;
+var started = false;
+
+// Last update timestamp
+let then;
+
+// Flag on if playing
+let busy = false;
+
+var played;
+var myCanvas;
+
+var start = function()
+{
+  if(played)
+    return;
+  played = true
+  cont[sn].song.play();
+  //messagediv.innerHTML = "Playing audio. <button style='font-size:inherit' onclick='audio.pause()'>Stop</button>"
+  myCanvas.onclick = '';
+}
+
+
+// Advance video playhead before rendering
+function update(now) {
+  const step = now - (then || now)
+
+  if (busy) {
+    source.currentTime += step * 0.001
+
+    // Reset
+    if (source.currentTime >= source.duration) {
+      source.currentTime = 0
+
+      busy = false
+    }
+  }
+
+  // Reset
+  then = now;
+}
 
 function preload () {
 
   myFont = loadFont('fonts/Newfont-Regular.ttf');
-
+  if (true) {
   cont.push({
     dato_numero: "13;2% decrease per decade",
     dato_info: "rate of Change of the arCtic sea iCe",
-    song: loadSound('Sounds/Sound1.mp3'),
-    bg0: loadImage('Images/img1.jpg'),
-    bg1: loadImage('Images/img2.jpg'),
+    songP:'Sounds/Sound1.mp3',
+    song: null,
+    bg0P: 'Images/img1.jpg',
+    bg0: null,
+    bg1P: 'Images/img2.jpg',
     tint1: null,
     tint2: null,
     image: null,
@@ -28,9 +76,11 @@ function preload () {
   cont.push({
     dato_numero: "3;2 millimeters per year",
     dato_info: "rate of sea level rise",
-    song: loadSound('Sounds/Sound2.mp3'),
-    bg0: loadImage('Images/img1.jpg'),
-    bg1: loadImage('Images/img3.jpg'),
+    songP:'Sounds/Sound2.mp3',
+    song: null,
+    bg0P: 'Images/img1.jpg',
+    bg0: null,
+    bg1P: 'Images/img3.jpg',
     tint1: null,
     tint2: null,
     image: null,
@@ -44,9 +94,11 @@ function preload () {
   cont.push({
     dato_numero: "2016",
     dato_info: "warmest year on reCord",
-    song: loadSound('Sounds/Sound3.mp3'),
-    bg0: loadImage('Images/img1.jpg'),
-    bg1: loadImage('Images/img4.jpg'),
+    songP:'Sounds/Sound3.mp3',
+    song: null,
+    bg0P: 'Images/img1.jpg',
+    bg0: null,
+    bg1P: 'Images/img4.jpg',
     tint1: null,
     tint2: null,
     image: null,
@@ -61,9 +113,11 @@ function preload () {
   cont.push({
     dato_numero: "407;61 parts per million",
     dato_info: "Carbon dioxide level",
-    song: loadSound('Sounds/Sound4.mp3'),
-    bg0: loadImage('Images/img1.jpg'),
-    bg1: loadImage('Images/img5.jpg'),
+    songP:'Sounds/sound4.mp3',
+    song: null,
+    bg0P: 'Images/img1.jpg',
+    bg0: null,
+    bg1P: 'Images/img5.jpg',
     tint1: null,
     tint2: null,
     image: null,
@@ -78,9 +132,11 @@ function preload () {
   cont.push({
     dato_numero: "22:000/31:000",
     dato_info: "polar bears worldwide",
-    song: loadSound('Sounds/Sound5.mp3'),
-    bg0: loadImage('Images/img1.jpg'),
-    bg1: loadImage('Images/img6.jpg'),
+    songP:'Sounds/Sound5.mp3',
+    song: null,
+    bg0P: 'Images/img1.jpg',
+    bg0: null,
+    bg1P: 'Images/img6.jpg',
     tint1: null,
     tint2: null,
     image: null,
@@ -95,9 +151,11 @@ function preload () {
   cont.push({
     dato_numero: "30%",
     dato_info: "deCrease of global polar bear number by 2050",
-    song: loadSound('Sounds/Sound6.mp3'),
-    bg0: loadImage('Images/img1.jpg'),
-    bg1: loadImage('Images/img7.jpg'),
+    songP:'Sounds/Sound6.mp3',
+    song: null,
+    bg0P: 'Images/img1.jpg',
+    bg0: null,
+    bg1P: 'Images/img7.jpg',
     tint1:null,
     tint2: null,
     image: null,
@@ -112,9 +170,12 @@ function preload () {
   cont.push({
     dato_numero: "0;302=F",
     dato_info: "warming of top 700 meters of oCean since 1969",
-    song: loadSound('Sounds/Sound7.mp3'),
-    bg0: loadImage('Images/img1.jpg'),
-    bg1: loadImage('Images/img8.jpg'),
+    songP:'Sounds/sound7.mp3',
+    song: null,
+    bg0P: 'Images/img1.jpg',
+    bg0: null,
+    bg1P: 'Images/img8.jpg',
+    bg1: null,
     tint1:null,
     tint2: null,
     image: null,
@@ -129,9 +190,12 @@ function preload () {
   cont.push({
     dato_numero: "127;0 decreasing rate of change",
     dato_info: "Antartica mass variation since 2002",
-    song: loadSound('Sounds/Sound8.mp3'),
-    bg0: loadImage('Images/img1.jpg'),
-    bg1: loadImage('Images/img9.jpg'),
+    songP:'Sounds/sound8.mp3',
+    song: null,
+    bg0P: 'Images/img1.jpg',
+    bg0: null,
+    bg1P: 'Images/img9.jpg',
+    bg1: null,
     tint1:null,
     tint2: null,
     image: null,
@@ -145,9 +209,12 @@ function preload () {
   cont.push({
     dato_numero: "2050",
     dato_info: "New research predicts a doubling of surface melting",
-    song: loadSound('Sounds/Sound9.mp3'),
-    bg0: loadImage('Images/img1.jpg'),
-    bg1: loadImage('Images/img10.jpg'),
+    songP:'Sounds/Sound9.mp3',
+    song: null,
+    bg0P: 'Images/img1.jpg',
+    bg0: null,
+    bg1P: 'Images/img10.jpg',
+    bg1: null,
     tint1:null,
     tint2: null,
     image: null,
@@ -161,49 +228,134 @@ function preload () {
   cont.push({
     dato_numero: "286;0 decreasing rate of change",
     dato_info: "Greenland mass variation since 2002",
-    song: loadSound('Sounds/Sound10.mp3'),
-    bg0: loadImage('Images/img1.jpg'),
-    bg1: loadImage('Images/img11.jpg'),
+    songP:'Sounds/Sound10.mp3',
+    song: null,
+    bg0P: 'Images/img1.jpg',
+    bg0: null,
+    bg1P: 'Images/img11.jpg',
+    bg1: null,
     tint1: null,
     tint2: null,
     image: null,
     videoP: 'assets/Greenland mass variation.mp4',
     video: null,
     bg2: null,
-    ct1: color(0,0,0),
+    ct1: color(255,255,255),
     ct2: color(0,0,0)
   });
+} // container for data
 
   sn = floor(random(0,cont.length));
+  userAgent = window.navigator.userAgent;
+  iphone = userAgent.match(/iPad/i) || userAgent.match(/iPhone/i);
 
+  if (iphone) {
+    // AUDIO FIX
+    cont[sn].song = new Audio(cont[sn].songP);
+
+
+//
+//     window.AudioContext = window.AudioContext||window.webkitAudioContext;
+//     myAudioContext = new AudioContext();
+//
+//     var request = new XMLHttpRequest();
+//   request.open('GET', cont[sn].songP, true);
+//   request.responseType = 'arraybuffer';
+//
+//   // Decode asynchronously
+//   request.onload = function() {
+//     myAudioContext.decodeAudioData(request.response, function(buffer) {
+//       cont[sn].song = buffer;
+//     }, onError);
+//   }
+//   request.send();
+//
+//
+//
+//
+// //    cont[sn].song = new Audio(cont[sn].songP);
+//   //  cont[sn].song.load();
+//     cont[sn].song.loop( true );
+
+  } else {
+    // loadsound
+    cont[sn].song = loadSound(cont[sn].songP);
+  }
+  // load images
+  if (cont[sn].bg0P != null ) {
+    cont[sn].bg0 = loadImage(cont[sn].bg0P);
+  }
+  if (cont[sn].bg1P != null) {
+    cont[sn].bg1 = loadImage(cont[sn].bg1P);
+  }
+
+  // load video
   if (cont[sn].videoP != null ) {
-    cont[sn].video = createVideo(cont[sn].videoP);
-    cont[sn].video.hide();
-    //cont[sn].video.loop();
+
+    if (iphone) {
+    // iPad or iPhone
+      then = Date.now();
+      source = document.createElement('video');
+      source.setAttribute('src', cont[sn].videoP);
+
+      /*source.addEventListener('loadstart', () => {
+        // Safe to call
+        window.requestAnimationFrame(repeat)
+      })*/
+
+      source.load();
+
+    }
+    else {
+      cont[sn].video = createVideo(cont[sn].videoP);
+      cont[sn].video.hide();
+      //cont[sn].video.loop();
+    }
+
+
   }
 
 }
 
-function setup() {
-  //var i = floor(random(0,cont.length));
+// function playIOS() {
+//   console.log("playios");
+//   if (started != true ) {
+//
+//   //song._looping = true;
+//   song.play();
+//   //console.log(song);
+//   started = true;
+//   }
+// }
 
+function setup() {
+  createCanvas(window.innerWidth, window.innerHeight);
+  target = document.querySelector('canvas').getContext('2d');
+  //target = document.getElementById('defaultCanvas0').getContext('2d');
 
   selected = cont[sn];
   song = selected.song;
   slide = 0;
-  //selected.video = createVideo(selected.video);
-  /*for(var i = 0 ; i < cont.length ; i++ ) {
-    if (cont[i].video != null ) {
-      cont[i].video.hide();
-    }
-  }*/
-  createCanvas(window.innerWidth, window.innerHeight);
   textFont(myFont);
-  //if (selected.videoP != null ) {
-    //if (selected.video != null){
-      //selected.video.loop();
-    //}
-  //}
+
+if (iphone) {
+   // iPad or iPhone
+
+   var el = document.getElementsByTagName("canvas")[0];
+    el.addEventListener("touchstart", mouseClicked, false);
+    //el.addEventListener("touchstart", playIOS, false);
+    //var bod = document.getElementsByTagName("body")[0];
+    //bod.addEventListener('ended', playIOS, false);
+      // AUDIO FIX
+      played = false;
+  myCanvas = document.getElementsByTagName("canvas")[0];
+  myCanvas.onclick = function()
+  {
+    start()
+  }
+  myCanvas.addEventListener('touchstart', start, false)
+
+  }
 }
 
 
@@ -242,9 +394,18 @@ function draw() {
       image(selected.image,0,0,width,height);
     }
 
-    if (selected.video != null) {
-      image(selected.video,0,0,width,height);
+    if (iphone) {
+      // iPad or iPhone
+      //console.log("video fix for ios");
+      busy = true;
+      update(Date.now());
+      target.drawImage(source, 0, 0,width,height);
+    } else {
+      if (selected.video != null) {
+        image(selected.video,0,0,width,height);
+      }
     }
+
     if ( selected.tint2 != null ) {
       background(selected.tint2);
     }
@@ -255,41 +416,57 @@ function draw() {
 
 }
 
-function mousePressed() {
 
-  let fs = fullscreen();
-  if(!fs) {
-    fullscreen(true);
-  }
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
 
-  if (selected.video != null) {
-      selected.video.loop();
-  }
-
-
+function mouseClicked() {
 
   if (slide == 2) {
-    slide++;
-    song.setVolume(0.2);
-  }
-
-  if (slide == 1) {
-    if (! song.isPlaying() ) {
-      song.play();
+    slide=1;
+    if (!iphone) {
+      song.setVolume(0.2);
     }
-    song.setVolume(1);
+  } else if (slide == 1) {
+    if (!iphone) {
+      if (! song.isPlaying() ) {
+        song.play();
+      }
+      song.setVolume(1);
+    }
     slide++;
-  }
+  } else if (slide == 0 ) {
 
-  if (slide >2 ) {
-    slide = 1;
-  }
+    //console.log(userAgent);
+    if (iphone) {
+      if (true){
+        start();
+         // iPad or iPhone
+         //playIOS();
+         /*console.log("audio fix for ios");
+         if('webkitAudioContext' in window) {
+            myAudioContext = new webkitAudioContext();
+            //var audioSource = song;//myAudioContext.createBufferSource();
+            //mySource = audioSource;
+            //bufferSound();
+            //mySource.connect(myAudioContext.destination);
+            song.connect(myAudioContext.destination);
+        }*/
+      }
+    }
+    else {
+      ( !fullscreen() ? fullscreen(true) : null )
+      if (selected.video != null) {
+        selected.video.loop();
+      }
+    }
 
-  if (slide == 0 ) {
     slide++;
   }
 }
 
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+function repeat(t) {
+  update(t)
+  window.requestAnimationFrame(repeat)
 }
